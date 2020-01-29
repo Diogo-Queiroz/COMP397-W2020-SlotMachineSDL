@@ -3,7 +3,7 @@
 #define __LEVEL_1_SCENE__
 
 #include "Scene.h"
-#include "ship.h"
+#include "StartButton.h"
 
 class Level1Scene : public Scene
 {
@@ -17,12 +17,15 @@ public:
 	void handleEvents() override;
 	void start() override;
 
+	// getters
+	glm::vec2 getMousePosition();
+
 private:
 	// game objects
 
 	glm::vec2 m_mousePosition;
 	
-	Ship* m_pShip;
+	StartButton* m_pStartButton;
 };
 
 #endif /* defined (__LEVEL_1_SCENE__) */
