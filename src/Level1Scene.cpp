@@ -47,10 +47,21 @@ void Level1Scene::handleEvents()
 			break;
 
 		case SDL_MOUSEBUTTONDOWN:
-			m_pStartButton->setMouseButtonClicked(true);
+			switch(event.button.button)
+			{
+			case SDL_BUTTON_LEFT:
+				m_pStartButton->setMouseButtonClicked(true);
+				break;
+			}
+		
 			break;
 		case SDL_MOUSEBUTTONUP:
-			m_pStartButton->setMouseButtonClicked(false);
+			switch (event.button.button)
+			{
+			case SDL_BUTTON_LEFT:
+				m_pStartButton->setMouseButtonClicked(false);
+				break;
+			}
 			break;
 		case SDL_MOUSEWHEEL:
 			wheel = event.wheel.y;
