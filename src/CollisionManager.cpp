@@ -74,7 +74,7 @@ bool CollisionManager::AABBCheck(GameObject* object1, GameObject* object2)
 
 			switch (object2->getType()) {
 			case ISLAND:
-				std::cout << "Collision with Platform!" << std::endl;
+				std::cout << "Collision with Island!" << std::endl;
 				TheSoundManager::Instance()->playSound("yay", 0);
 				break;
 			default:
