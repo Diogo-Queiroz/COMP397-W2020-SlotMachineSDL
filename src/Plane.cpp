@@ -1,7 +1,7 @@
 #include "Plane.h"
 #include "Game.h"
 
-Plane::Plane():m_maxSpeed(10.0f)
+Plane::Plane() :m_maxSpeed(10.0f), m_isMoving(false)
 {
 	TheTextureManager::Instance()->load("../Assets/textures/plane.png",
 		"plane", TheGame::Instance()->getRenderer());
@@ -33,9 +33,19 @@ void Plane::draw()
 
 void Plane::update()
 {
+	
 	auto currentPosition = getPosition();
+	auto currentVelocity = getVelocity();
 
-	setPosition(glm::vec2(currentPosition.x + getVelocity().x, currentPosition.y + getVelocity().y));
+	if(!m_isMoving)
+	{
+		setVelocity(glm::vec2(Util::lerp(currentVelocity.x, 0.0f, 0.02f), currentVelocity.y));
+	}
+	
+	auto deltax = currentPosition.x + currentVelocity.x;
+	setPosition(glm::vec2(deltax, currentPosition.y));
+
+	m_checkBounds();
 }
 
 void Plane::clean()
@@ -49,12 +59,35 @@ void Plane::move(Move newMove)
 	switch(newMove)
 	{
 	case RIGHT:
-		//setPosition(glm::vec2(currentPosition.x + 10.0f, currentPosition.y));
 		setVelocity(glm::vec2(1.0f * m_maxSpeed, 0.0f));
 		break;
 	case LEFT:
-		//setPosition(glm::vec2(currentPosition.x - 10.0f, currentPosition.y));
 		setVelocity(glm::vec2(-1.0f * m_maxSpeed, 0.0f));
 		break;
+	}
+}
+
+bool Plane::getIsMoving()
+{
+	return m_isMoving;
+}
+
+void Plane::setIsMoving(bool newState)
+{
+	m_isMoving = newState;
+}
+
+void Plane::m_checkBounds()
+{
+	// check right bounds
+	if(getPosition().x >= Config::SCREEN_WIDTH - getWidth() * 0.5f)
+	{
+		setPosition(glm::vec2(Config::SCREEN_WIDTH - getWidth() * 0.5f, getPosition().y));
+	}
+
+	// check left bounds
+	if (getPosition().x <=  getWidth() * 0.5f)
+	{
+		setPosition(glm::vec2(getWidth() * 0.5f, getPosition().y));
 	}
 }

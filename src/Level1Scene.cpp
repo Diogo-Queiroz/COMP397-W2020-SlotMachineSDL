@@ -21,7 +21,7 @@ void Level1Scene::draw()
 void Level1Scene::update()
 {
 	m_pPlane->update();
-	m_pPlane->setVelocity(m_pPlane->getVelocity() * 0.97f);
+	//m_pPlane->setVelocity(m_pPlane->getVelocity() * 0.97f);
 	// plane moving with mouse motion
 	//m_pPlane->setPosition(glm::vec2(m_mousePosition.x, m_pPlane->getPosition().y));
 
@@ -114,10 +114,10 @@ void Level1Scene::handleEvents()
 				break;
 
 			case SDLK_a:
-
+				m_pPlane->setIsMoving(false);
 				break;
 			case SDLK_d:
-
+				m_pPlane->setIsMoving(false);
 				break;
 			}
 			
