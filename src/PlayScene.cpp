@@ -258,7 +258,7 @@ void PlayScene::m_respawnPlanet()
 
 void PlayScene::m_createMines()
 {
-	for (size_t count = 0; count < Config::MINE_NUM; count++)
+	for (size_t count = 0; count < 20; count++)
 	{
 		Mine newMine = Mine();
 		m_pMines.push_back(newMine);
@@ -288,7 +288,7 @@ void PlayScene::m_updateMines()
 void PlayScene::m_respawnMines()
 {
 
-	for (size_t mine_index = 0; mine_index < Config::MINE_NUM; mine_index++)
+	for (size_t mine_index = 0; mine_index < 20; mine_index++)
 	{
 		if (m_pMines[mine_index].getTile() != NULL)
 		{

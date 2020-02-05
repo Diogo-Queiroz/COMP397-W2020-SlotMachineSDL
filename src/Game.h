@@ -85,6 +85,7 @@ private:
 
 	Uint32 m_frames;
 
+	// Scene Data Members
 	Scene* m_currentScene;
 	SceneState m_currentSceneState;
 };

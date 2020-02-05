@@ -23,6 +23,7 @@
 
 #include "TextureManager.h"
 #include "Game.h"
+#include "Config.h"
 
 const int FPS = 60;
 const int DELAY_TIME = 1000.0f / FPS;
@@ -38,7 +39,7 @@ int main(int argc, char * args[])
 	freopen("CON", "w", stdout);
 
 
-	TheGame::Instance()->init("Hello World", 100, 100, 800, 600, false);
+	TheGame::Instance()->init("Hello World", 100, 100, Config::SCREEN_WIDTH, Config::SCREEN_HEIGHT, false);
 
 	// The main Game Loop
 	while (TheGame::Instance()->running())

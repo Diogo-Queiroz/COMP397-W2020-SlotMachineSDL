@@ -3,7 +3,6 @@
 #define __LEVEL_1_SCENE__
 
 #include "Scene.h"
-#include "StartButton.h"
 
 class Level1Scene : public Scene
 {
@@ -23,9 +22,12 @@ public:
 private:
 	// game objects
 
+
+
+	// private data member
 	glm::vec2 m_mousePosition;
 	
-	StartButton* m_pStartButton;
+	
 };
 
 #endif /* defined (__LEVEL_1_SCENE__) */
