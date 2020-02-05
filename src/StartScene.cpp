@@ -3,7 +3,6 @@
 #include <ctime>
 #include "GLM/gtx/string_cast.hpp"
 #include <algorithm>
-#include "TileComparators.h"
 #include <iomanip>
 
 StartScene::StartScene()
@@ -39,7 +38,7 @@ void StartScene::handleEvents()
 {
 	int wheel = 0;
 	SDL_Event event;
-	if (SDL_PollEvent(&event))
+	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
 		{

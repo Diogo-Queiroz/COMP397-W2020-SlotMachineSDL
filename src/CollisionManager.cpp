@@ -27,12 +27,12 @@ bool CollisionManager::squaredRadiusCheck(GameObject* object1, GameObject* objec
 			object2->setIsColliding(true);
 
 			switch (object2->getType()) {
-			case PLANET:
-				std::cout << "Collision with Planet!" << std::endl;
+			case ISLAND:
+				std::cout << "Collision with ISLAND!" << std::endl;
 				TheSoundManager::Instance()->playSound("yay", 0);
 				break;
-			case MINE:
-				std::cout << "Collision with Mine!" << std::endl;
+			case CLOUD:
+				std::cout << "Collision with CLOUD!" << std::endl;
 				TheSoundManager::Instance()->playSound("thunder", 0);
 				break;
 			default:
@@ -73,7 +73,7 @@ bool CollisionManager::AABBCheck(GameObject* object1, GameObject* object2)
 			object2->setIsColliding(true);
 
 			switch (object2->getType()) {
-			case PLANET:
+			case ISLAND:
 				std::cout << "Collision with Platform!" << std::endl;
 				TheSoundManager::Instance()->playSound("yay", 0);
 				break;
@@ -220,17 +220,14 @@ bool CollisionManager::circleAABBCheck(GameObject* object1, GameObject* object2)
 			//std::cout << "Angle: " << angle << std::endl;
 
 			switch (object2->getType()) {
-			case PLANET:
-				std::cout << "Collision with Planet!" << std::endl;
+			case ISLAND:
+				std::cout << "Collision with ISLAND!" << std::endl;
 				TheSoundManager::Instance()->playSound("yay", 0);
 				break;
-			case MINE:
-				std::cout << "Collision with Mine!" << std::endl;
+			case CLOUD:
+				std::cout << "Collision with CLOUD!" << std::endl;
 				TheSoundManager::Instance()->playSound("thunder", 0);
 				break;
-			case SHIP:
-				//std::cout << "Collision with Ship!" << std::endl;
-				TheSoundManager::Instance()->playSound("thunder", 0);
 
 				if ((attackVector.x > 0 && attackVector.y < 0) || (attackVector.x < 0 && attackVector.y < 0))
 					// top right or top left

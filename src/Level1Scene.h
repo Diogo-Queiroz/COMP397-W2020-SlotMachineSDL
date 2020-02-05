@@ -3,6 +3,7 @@
 #define __LEVEL_1_SCENE__
 
 #include "Scene.h"
+#include "Plane.h"
 
 class Level1Scene : public Scene
 {
@@ -21,7 +22,7 @@ public:
 
 private:
 	// game objects
-
+	Plane* m_pPlane;
 
 
 	// private data member

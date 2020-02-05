@@ -13,12 +13,15 @@ Level1Scene::~Level1Scene()
 
 void Level1Scene::draw()
 {
-	
+	m_pPlane->draw();
 }
 
 void Level1Scene::update()
 {
-	
+	m_pPlane->update();
+	m_pPlane->setVelocity(m_pPlane->getVelocity() * 0.98f);
+	// plane moving with mouse motion
+	//m_pPlane->setPosition(glm::vec2(m_mousePosition.x, m_pPlane->getPosition().y));
 }
 
 void Level1Scene::clean()
@@ -30,7 +33,7 @@ void Level1Scene::handleEvents()
 	int wheel = 0;
 
 	SDL_Event event;
-	if (SDL_PollEvent(&event))
+	while(SDL_PollEvent(&event))
 	{
 		switch (event.type)
 		{
@@ -84,10 +87,10 @@ void Level1Scene::handleEvents()
 				
 				break;
 			case SDLK_a:
-				
+				m_pPlane->move(LEFT);
 				break;
 			case SDLK_d:
-				
+				m_pPlane->move(RIGHT);
 				break;
 			}
 			
@@ -104,10 +107,10 @@ void Level1Scene::handleEvents()
 				break;
 
 			case SDLK_a:
-				
+
 				break;
 			case SDLK_d:
-				
+
 				break;
 			}
 			
@@ -120,7 +123,8 @@ void Level1Scene::handleEvents()
 
 void Level1Scene::start()
 {
-
+	m_pPlane = new Plane(); // instantiates Plane
+	addChild(m_pPlane);
 }
 
 glm::vec2 Level1Scene::getMousePosition()
