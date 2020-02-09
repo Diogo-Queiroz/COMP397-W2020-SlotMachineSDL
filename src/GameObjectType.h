@@ -11,7 +11,9 @@ enum GameObjectType {
 	OCEAN,
 	PLANE,
 	START_BUTTON,
-	NUM_OF_TYPES
+	NUM_OF_TYPES,
+	SLOT_MACHINE,
+	SLOT_MACHINE_PLAY
 };
 
 #endif /* defined (__GAME_OBJECT_TYPE__)*/

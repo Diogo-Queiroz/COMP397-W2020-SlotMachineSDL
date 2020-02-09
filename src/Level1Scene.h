@@ -5,6 +5,9 @@
 #include "Scene.h"
 #include "Plane.h"
 #include "Island.h"
+#include "SlotMachine.h"
+#include "StartButton.h"
+#include "SlotPlayButton.h"
 
 class Level1Scene : public Scene
 {
@@ -25,12 +28,13 @@ private:
 	// game objects
 	Plane* m_pPlane;
 	Island* m_pIsland;
+	SlotMachine* m_pSlotMachine;
 
 
 	// private data member
 	glm::vec2 m_mousePosition;
-	
-	
+	StartButton* m_pStartButton;
+	SlotPlayButton* m_pSlotPlayButton;
 };
 
 #endif /* defined (__LEVEL_1_SCENE__) */
