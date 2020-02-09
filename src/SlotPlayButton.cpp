@@ -1,4 +1,5 @@
 #include "SlotPlayButton.h"
+#include "SlotMachine.h"
 #include "Game.h"
 
 SlotPlayButton::SlotPlayButton() : Button(
@@ -17,7 +18,8 @@ bool SlotPlayButton::ButtonClick()
 	if (m_mouseOver() && m_mouseButtonClicked)
 	{
 		if (!m_isClicked)
-		{;
+		{
+			SlotMachine().reels();
 			m_isClicked = true;
 		}
 		return true;

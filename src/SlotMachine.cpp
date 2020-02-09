@@ -2,6 +2,9 @@
 #include "TextureManager.h"
 #include "Game.h"
 #include <vector>
+#include <stdio.h>
+#include <fenv.h>
+#include <math.h>
 
 SlotMachine::SlotMachine()
 {
@@ -102,9 +105,9 @@ std::vector<std::string> SlotMachine::reels()
 	std::vector<std::string> betLine = { "", "", "" };
     std::vector<int> outCome = { 0, 0, 0 };
 
-    for (auto spin = 0; spin < betLine.size(); spin++)
+    for (auto spin = 0; spin < 3; spin++)
     {
-        outCome[spin] = floor((rand() * 65) + 1);
+    	outCome[spin] = floor( (static_cast<double>(rand()) / (RAND_MAX) * 65) + 1);
         /*switch (outCome[spin])
         {
             case checkRange(outCome[spin], 1, 27):
@@ -140,6 +143,7 @@ std::vector<std::string> SlotMachine::reels()
                 m_sevens++;
                 break;
         }*/
+        std::cout << outCome[spin] << std::endl;
         if (checkRange(outCome[spin], 1, 27))
         {
             betLine[spin] = "Blank";
@@ -181,8 +185,15 @@ std::vector<std::string> SlotMachine::reels()
             betLine[spin] = "Seven";
             m_sevens++;
         }
-        return betLine;
+        
     }
+
+	for (int i = 0; i < betLine.size(); ++i)
+	{
+        std::cout << "Bet[" << i << "] : " << betLine[i] << " from outCome[" << i << "] : " << outCome[i] << std::endl;
+	}
+	
+	return betLine;
 }
 
 void SlotMachine::determineWinnings()
