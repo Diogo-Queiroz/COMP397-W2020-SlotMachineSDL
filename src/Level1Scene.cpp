@@ -13,32 +13,78 @@ Level1Scene::~Level1Scene()
 
 void Level1Scene::draw()
 {
-	//m_pIsland->draw();
 	m_pSlotMachine->draw();
-	//m_pStartButton->draw();
 	m_pSlotPlayButton->draw();
-	//m_pPlane->draw();
+
+	//Labels
+	m_pJackpotLabel->draw();
+	m_pMoneyLabel->draw();
+	m_pTurnLabel->draw();
+	m_pWinLabel->draw();
+	m_pLossLabel->draw();
+	m_pWinRatioLabel->draw();
+	m_pBetLabel->draw();
+
+	// Buttons
+	m_pPlus_01_Button->draw();
+	m_pPlus_05_Button->draw();
+	m_pPlus_10_Button->draw();
+	m_pPlus_25_Button->draw();
+	m_pPlus_50_Button->draw();
+	m_pPlus_100_Button->draw();
+
+	m_pMinus_01_Button->draw();
+	m_pMinus_05_Button->draw();
+	m_pMinus_10_Button->draw();
+	m_pMinus_25_Button->draw();
+	m_pMinus_50_Button->draw();
+	m_pMinus_100_Button->draw();
 }
 
 void Level1Scene::update()
 {
-	/*m_pStartButton->setMousePosition(m_mousePosition);
-	m_pStartButton->ButtonClick();*/
 	m_pSlotPlayButton->setMousePosition(m_mousePosition);
 	m_pSlotPlayButton->ButtonClick();
-	//m_pPlane->update();
-	//m_pPlane->setVelocity(m_pPlane->getVelocity() * 0.97f);
-	// plane moving with mouse motion
-	//m_pPlane->setPosition(glm::vec2(m_mousePosition.x, m_pPlane->getPosition().y));
 
-	//CollisionManager::AABBCheck(m_pPlane, m_pIsland);
+	m_pResetButton->setMousePosition(m_mousePosition);
+	m_pResetButton->ButtonClick();
 
-	//CollisionManager::squaredRadiusCheck(m_pPlane, m_pIsland);
+	m_pQuitButton->setMousePosition(m_mousePosition);
+	m_pQuitButton->ButtonClick();
+
+	m_pPlus_01_Button->setMousePosition(m_mousePosition);
+	m_pPlus_05_Button->setMousePosition(m_mousePosition);
+	m_pPlus_10_Button->setMousePosition(m_mousePosition);
+	m_pPlus_25_Button->setMousePosition(m_mousePosition);
+	m_pPlus_50_Button->setMousePosition(m_mousePosition);
+	m_pPlus_100_Button->setMousePosition(m_mousePosition);
+
+	m_pMinus_01_Button->setMousePosition(m_mousePosition);
+	m_pMinus_05_Button->setMousePosition(m_mousePosition);
+	m_pMinus_10_Button->setMousePosition(m_mousePosition);
+	m_pMinus_25_Button->setMousePosition(m_mousePosition);
+	m_pMinus_50_Button->setMousePosition(m_mousePosition);
+	m_pMinus_100_Button->setMousePosition(m_mousePosition);
+
+	m_pPlus_01_Button->ButtonClick();
+	m_pPlus_05_Button->ButtonClick();
+	m_pPlus_10_Button->ButtonClick();
+	m_pPlus_25_Button->ButtonClick();
+	m_pPlus_50_Button->ButtonClick();
+	m_pPlus_100_Button->ButtonClick();
+
+	m_pMinus_01_Button->ButtonClick();
+	m_pMinus_05_Button->ButtonClick();
+	m_pMinus_10_Button->ButtonClick();
+	m_pMinus_25_Button->ButtonClick();
+	m_pMinus_50_Button->ButtonClick();
+	m_pMinus_100_Button->ButtonClick();
 
 }
 
 void Level1Scene::clean()
 {
+	removeAllChildren();
 }
 
 void Level1Scene::handleEvents()
@@ -142,17 +188,84 @@ void Level1Scene::start()
 	//m_pIsland = new Island(); // instantiates Island
 	//addChild(m_pIsland);
 
-	m_pSlotMachine = new SlotMachine();
+	// The Slot Machine
+	m_pSlotMachine =		new SlotMachine();
 	addChild(m_pSlotMachine);
 
-	m_pSlotPlayButton = new SlotPlayButton();
-	m_pStartButton = new StartButton();
-	glm::vec2 buttonSize = TheTextureManager::Instance()->getTextureSize("slotPlayButton");
-	m_pSlotPlayButton->setPosition(
-		glm::vec2(
-			Config::SCREEN_WIDTH - (buttonSize.x * 0.5),
-			Config::SCREEN_HEIGHT - ( buttonSize.y * 0.5f)));
+	// SDL Colors
+	const SDL_Color blue = { 0,0,255,255 };
+	const int size = 15;
+	
+	//Labels
+	m_pJackpotLabel =		new Label("Jackpot Label", "Dock51", size, blue,
+								glm::vec2(120, 100.f));
+	m_pMoneyLabel =			new Label("Money Player", "Dock51", size, blue,
+								glm::vec2(400, 150.f));
+	m_pTurnLabel =			new Label("Turn Label", "Dock51", size, blue,
+								glm::vec2(600, 200.f));
+	m_pWinLabel =			new Label("Win Label", "Dock51", size, blue,
+								glm::vec2(150, 250.f));
+	m_pLossLabel =			new Label("Loss Label", "Dock51", size, blue,
+								glm::vec2(30, 300.f));
+	m_pWinRatioLabel =		new Label("WIn Ratio Label", "Dock51", size, blue,
+								glm::vec2(280, 350.f));
+	m_pBetLabel =			new Label("Bet Label""Dock51", "Dock51", size, blue,
+								glm::vec2(360, 400.f));
+
+	// Buttons
+	m_pSlotPlayButton =		new SlotPlayButton();
+	m_pQuitButton = new QuitButton();
+	m_pResetButton = new ResetButton();
 	addChild(m_pSlotPlayButton);
+	addChild(m_pQuitButton);
+	addChild(m_pResetButton);
+
+	m_pPlus_01_Button =		new BetButton(1, plus, "plus");
+	m_pPlus_05_Button =		new BetButton(5, plus, "plus");
+	m_pPlus_10_Button =		new BetButton(10, plus, "plus");
+	m_pPlus_25_Button =		new BetButton(25, plus, "plus");
+	m_pPlus_50_Button =		new BetButton(50, plus, "plus");
+	m_pPlus_100_Button =	new BetButton(100, plus, "plus");
+
+	m_pMinus_01_Button =	new BetButton(1, minus, "minus");
+	m_pMinus_05_Button =	new BetButton(5, minus, "minus");
+	m_pMinus_10_Button =	new BetButton(10, minus, "minus");
+	m_pMinus_25_Button =	new BetButton(25, minus, "minus");
+	m_pMinus_50_Button =	new BetButton(50, minus, "minus");
+	m_pMinus_100_Button =	new BetButton(100, minus, "minus");	
+
+	// Buttons Positions
+	m_pPlus_01_Button->setPosition(glm::vec2(Config::SCREEN_WIDTH,50));
+	m_pPlus_05_Button->setPosition(glm::vec2(Config::SCREEN_WIDTH + 50, 100));
+	m_pPlus_10_Button->setPosition(glm::vec2(Config::SCREEN_WIDTH + 100, 150));
+	m_pPlus_25_Button->setPosition(glm::vec2(Config::SCREEN_WIDTH + 150, 200));
+	m_pPlus_50_Button->setPosition(glm::vec2(Config::SCREEN_WIDTH + 250, 250));
+	m_pPlus_100_Button->setPosition(glm::vec2(Config::SCREEN_WIDTH + 300, 300));
+					   
+	m_pMinus_01_Button->setPosition(glm::vec2(100, 50));
+	m_pMinus_05_Button->setPosition(glm::vec2(100, 100));
+	m_pMinus_10_Button->setPosition(glm::vec2(100, 150));
+	m_pMinus_25_Button->setPosition(glm::vec2(100, 200));
+	m_pMinus_50_Button->setPosition(glm::vec2(100, 250));
+	m_pMinus_100_Button->setPosition(glm::vec2(100, 300));
+
+	// Adding Childs
+	addChild(m_pPlus_01_Button);
+	addChild(m_pPlus_05_Button);
+	addChild(m_pPlus_10_Button);
+	addChild(m_pPlus_25_Button);
+	addChild(m_pPlus_50_Button);
+	addChild(m_pPlus_100_Button);
+
+	addChild(m_pMinus_01_Button);
+	addChild(m_pMinus_05_Button);
+	addChild(m_pMinus_10_Button);
+	addChild(m_pMinus_25_Button);
+	addChild(m_pMinus_50_Button);
+	addChild(m_pMinus_100_Button);
+
+	// Position labels and texts
+	
 }
 
 glm::vec2 Level1Scene::getMousePosition()

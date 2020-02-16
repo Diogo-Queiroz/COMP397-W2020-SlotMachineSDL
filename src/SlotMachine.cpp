@@ -6,9 +6,11 @@
 #include <fenv.h>
 #include <math.h>
 
+SlotMachine* SlotMachine::s_pInstance;
+
 SlotMachine::SlotMachine()
 {
-    TheTextureManager::Instance()->load("../Assets/textures/slot.png",
+    TheTextureManager::Instance()->load("../Assets/textures/slot-machine.png",
         "slotMachine", TheGame::Instance()->getRenderer());
 
     glm::vec2 size = TheTextureManager::Instance()->getTextureSize("slotMachine");
@@ -54,14 +56,14 @@ void SlotMachine::showPlayerStats()
 
 void SlotMachine::resetFruitTally()
 {
-    m_grapes = 0;
+    m_bars = 0;
+    m_bells = 0;
+	m_grapes = 0;
+    m_sevens = 0;
+    m_blanks = 0;
     m_bananas = 0;
     m_oranges = 0;
     m_cherries = 0;
-    m_bars = 0;
-    m_bells = 0;
-    m_sevens = 0;
-    m_blanks = 0;
 }
 
 void SlotMachine::resetAll()
@@ -88,6 +90,10 @@ void SlotMachine::showLossMessage()
 {
     m_playerMoney -= m_playerBet;
     std::cout << "You lost!!!" << std::endl;
+	if (m_playerMoney <= 0)
+	{
+        TheGame::Instance()->changeSceneState(END_SCENE);
+	}
     resetFruitTally();
 }
 
@@ -241,6 +247,27 @@ void SlotMachine::determineWinnings()
 	    m_lossNumber++;
 	    showLossMessage();
     }
+}
+
+void SlotMachine::setPlayerBet(int m_bet_value, GameItemType m_type)
+{
+	switch (m_type)
+	{
+    case plus:
+        m_playerBet += m_bet_value;
+        break;
+    case minus:
+        m_playerBet -= m_bet_value;
+		break;
+    case negative:
+        m_playerBet = 0;
+        break;
+	}
+}
+
+int SlotMachine::getPlayerBet()
+{
+    return m_playerBet;
 }
 
 void SlotMachine::checkJackpot()

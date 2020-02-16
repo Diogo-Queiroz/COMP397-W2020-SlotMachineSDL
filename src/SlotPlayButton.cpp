@@ -3,9 +3,9 @@
 #include "Game.h"
 
 SlotPlayButton::SlotPlayButton() : Button(
-	"../Assets/textures/StartButton.png",
+	"../Assets/textures/slot-spin-btn.png",
 	"slotPlayButton",
-	SLOT_MACHINE_PLAY, glm::vec2(400.0f, 300.0f)), m_isClicked(false) 
+	SLOT_MACHINE_PLAY, glm::vec2(100.0f, 100.0f)), m_isClicked(false) 
 {
 }
 

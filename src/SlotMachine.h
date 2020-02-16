@@ -3,10 +3,21 @@
 #ifndef __SLOT_MACHINE__
 #define __SLOT_MACHINE__
 #include "DisplayObject.h"
+#include "GameItemType.h"
 
 class SlotMachine : public DisplayObject
 {
 public:
+    static SlotMachine* Instance()
+    {
+	    if (s_pInstance == nullptr)
+	    {
+            s_pInstance = new SlotMachine();
+            return s_pInstance;
+	    }
+        return s_pInstance;
+    }
+	
 	SlotMachine();
 	~SlotMachine();
 
@@ -23,11 +34,15 @@ public:
     bool checkRange(int value, int lowerBounds, int upperBounds);
     std::vector<std::string> reels();
     void determineWinnings();
-	
+    void setPlayerBet(int m_bet_value, GameItemType m_type);
+    int getPlayerBet();
+
 private:
 	
 protected:
-    int m_playerMoney = 1000;
+    std::string m_fruits = "";
+    float m_winRatio = 0.0f;
+	int m_playerMoney = 1000;
     int m_winnings = 0;
     int m_jackpot = 5000;
     int m_turn = 0;
@@ -35,8 +50,6 @@ protected:
     int m_winNumber = 0;
     int m_lossNumber = 0;
     int m_spinResult;
-	std::string m_fruits = "";
-    float m_winRatio = 0.0f;
     int m_grapes = 0;
     int m_bananas = 0;
     int m_oranges = 0;
@@ -45,7 +58,11 @@ protected:
     int m_bells = 0;
     int m_sevens = 0;
     int m_blanks = 0;
+
+    static SlotMachine* s_pInstance;
 };
+
+typedef SlotMachine TheSlotMachine;
 
 #endif /* defined (__SLOT_MACHINE__) */
 /**  // NOLINT(clang-diagnostic-comment, clang-diagnostic-comment, clang-diagnostic-comment, clang-diagnostic-comment)
