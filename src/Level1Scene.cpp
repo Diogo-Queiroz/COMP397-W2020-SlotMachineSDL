@@ -7,6 +7,8 @@ float winRatio;
 
 Level1Scene::Level1Scene()
 {
+	TheSoundManager::Instance()->load("../Assets/audio/casino-lounge.mp3",
+		"lounge", sound_type::SOUND_SFX);
 	start();
 }
 
@@ -16,6 +18,7 @@ Level1Scene::~Level1Scene()
 
 void Level1Scene::draw()
 {
+	TheSoundManager::Instance()->playSound("lounge", 1);
 	m_pSlotMachine->draw();
 	m_pSlotPlayButton->draw();
 	m_pResetButton->draw();

@@ -21,8 +21,8 @@ bool BetButton::ButtonClick()
 	if (m_mouseOver() && m_mouseButtonClicked)
 	{
 		if (!m_isClicked)
-		{
-			TheSoundManager::Instance()->playSound("buttonPressed", 0);
+		{			
+			TheSoundManager::Instance()->playSound("button", 0);
 			TheSlotMachine::Instance()->setPlayerBet(m_betValue, m_type);
 			if (TheSlotMachine::Instance()->getPlayerBet() <= 0)
 			{

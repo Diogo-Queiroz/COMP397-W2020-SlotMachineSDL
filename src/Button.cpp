@@ -12,6 +12,9 @@ Button::Button(std::string imagePath, std::string buttonName, GameObjectType typ
 	setHeight(size.y);
 	setPosition(position);
 	setType(type);
+
+	TheSoundManager::Instance()->load("../Assets/audio/button.mp3",
+		"button", sound_type::SOUND_SFX);
 }
 
 Button::~Button()

@@ -19,6 +19,7 @@ bool ResetButton::ButtonClick()
 	{
 		if (!m_isClicked)
 		{
+			TheSoundManager::Instance()->playSound("button", 0);
 			TheSlotMachine::Instance()->resetAll();
 			m_isClicked = false;
 		}
