@@ -4,6 +4,7 @@
 #define __SLOT_MACHINE__
 #include "DisplayObject.h"
 #include "GameItemType.h"
+#include <sstream>
 
 class SlotMachine : public DisplayObject
 {
@@ -34,12 +35,15 @@ public:
     bool checkRange(int value, int lowerBounds, int upperBounds);
     std::vector<std::string> reels();
     void determineWinnings();
-    void setPlayerBet(int m_bet_value, GameItemType m_type);
-    int getPlayerBet();
 
-private:
+	// Setters & Getters
+	void setPlayerBet(int m_bet_value, GameItemType m_type);
 	
-protected:
+    int getPlayerBet();
+    int getPlayerMoney();
+    int getJackpot();
+
+	// Public members
     std::string m_fruits = "";
     float m_winRatio = 0.0f;
 	int m_playerMoney = 1000;
@@ -49,7 +53,7 @@ protected:
     int m_playerBet = 0;
     int m_winNumber = 0;
     int m_lossNumber = 0;
-    int m_spinResult;
+    std::vector<std::string> m_spinResult;
     int m_grapes = 0;
     int m_bananas = 0;
     int m_oranges = 0;
@@ -58,6 +62,13 @@ protected:
     int m_bells = 0;
     int m_sevens = 0;
     int m_blanks = 0;
+    std::string winRatioText = "0.00%";
+    std::ostringstream winRatioStr;
+
+	int m_spinResultIndex [3] = {0,0,0};
+private:
+	
+protected:
 
     static SlotMachine* s_pInstance;
 };

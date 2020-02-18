@@ -8,7 +8,7 @@
 class BetButton : public Button
 {
 public:
-	BetButton(int value, GameItemType type, std::string stringType);
+	BetButton(int value, GameItemType type, const std::string& stringType);
 	~BetButton();
 	bool ButtonClick() override;
 

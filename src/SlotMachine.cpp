@@ -1,5 +1,6 @@
 #include "SlotMachine.h"
 #include "TextureManager.h"
+#include "SlotMachineImage.h"
 #include "Game.h"
 #include <vector>
 #include <stdio.h>
@@ -45,13 +46,13 @@ void SlotMachine::clean()
 
 void SlotMachine::showPlayerStats()
 {
-	m_winRatio = m_winNumber / m_turn;
+	m_winRatio = m_winNumber / (1.0f * (m_turn)) * 100;
     std::cout << "Jackpot: " << m_jackpot << std::endl;
     std::cout << "Player Money: " << m_playerMoney << std::endl;
     std::cout << "Turn: " << m_turn << std::endl;
     std::cout << "Wins: " << m_winNumber << std::endl;
     std::cout << "Loses: " << m_lossNumber << std::endl;
-    std::cout << "Win Ratio: " << m_winRatio * 100 << "%" << std::endl;
+    std::cout << "Win Ratio: " << m_winRatio << "%" << std::endl;
 }
 
 void SlotMachine::resetFruitTally()
@@ -114,81 +115,54 @@ std::vector<std::string> SlotMachine::reels()
     for (auto spin = 0; spin < 3; spin++)
     {
     	outCome[spin] = floor( (static_cast<double>(rand()) / (RAND_MAX) * 65) + 1);
-        /*switch (outCome[spin])
-        {
-            case checkRange(outCome[spin], 1, 27):
-                betLine[spin] = "Blank";
-                m_blanks++;
-                break;
-            case checkRange(outCome[spin], 28, 37): // 15.4% probability
-                betLine[spin] = "Grapes";
-                m_grapes++;
-                break;
-            case checkRange(outCome[spin], 38, 46): // 13.8% probability
-                betLine[spin] = "Banana";
-                m_bananas++;
-                break;
-            case checkRange(outCome[spin], 47, 54): // 12.3% probability
-                betLine[spin] = "Orange";
-                m_oranges++;
-                break;
-            case checkRange(outCome[spin], 55, 59): //  7.7% probability
-                betLine[spin] = "Cherry";
-                m_cherries++;
-                break;
-            case checkRange(outCome[spin], 60, 62): //  4.6% probability
-                betLine[spin] = "Bar";
-                m_bars++;
-                break;
-            case checkRange(outCome[spin], 63, 64): //  3.1% probability
-                betLine[spin] = "Bell";
-                m_bells++;
-                break;
-            case checkRange(outCome[spin], 65, 65): //  1.5% probability
-                betLine[spin] = "Seven";
-                m_sevens++;
-                break;
-        }*/
         std::cout << outCome[spin] << std::endl;
         if (checkRange(outCome[spin], 1, 27))
         {
             betLine[spin] = "Blank";
+            m_spinResultIndex[spin] = 0;
             m_blanks++;
         }
         else if (checkRange(outCome[spin], 28, 37)) // 15.4% probability 
         {
             betLine[spin] = "Grapes";
+            m_spinResultIndex[spin] = 1;
             m_grapes++;
         }
         else if (checkRange(outCome[spin], 38, 46)) // 13.8% probability
         {
             betLine[spin] = "Banana";
+            m_spinResultIndex[spin] = 2;
             m_bananas++;
         }
         else if (checkRange(outCome[spin], 47, 54)) // 12.3% probability
         {
             betLine[spin] = "Orange";
+            m_spinResultIndex[spin] = 3;
             m_oranges++;
         }
         else if (checkRange(outCome[spin], 55, 59)) //  7.7% probability
         {
             betLine[spin] = "Cherry";
+            m_spinResultIndex[spin] = 4;
             m_cherries++;
 
         }
         else if (checkRange(outCome[spin], 60, 62)) //  4.6% probability
         {
             betLine[spin] = "Bar";
+            m_spinResultIndex[spin] = 5;
             m_bars++;
         }
         else if (checkRange(outCome[spin], 63, 64)) //  3.1% probability
         {
             betLine[spin] = "Bell";
+            m_spinResultIndex[spin] = 6;
             m_bells++;
         }
         else if (checkRange(outCome[spin], 65, 65)) //  1.5% probability
         {
             betLine[spin] = "Seven";
+            m_spinResultIndex[spin] = 7;
             m_sevens++;
         }
         
@@ -269,6 +243,12 @@ int SlotMachine::getPlayerBet()
 {
     return m_playerBet;
 }
+
+int SlotMachine::getPlayerMoney()
+{
+    return m_playerMoney;
+}
+
 
 void SlotMachine::checkJackpot()
 {

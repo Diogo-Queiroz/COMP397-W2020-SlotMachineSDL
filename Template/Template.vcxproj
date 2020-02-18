@@ -179,6 +179,7 @@
     <ClCompile Include="..\src\PlayScene.cpp" />
     <ClCompile Include="..\src\Scene.cpp" />
     <ClCompile Include="..\src\SlotMachine.cpp" />
+    <ClCompile Include="..\src\SlotMachineImage.cpp" />
     <ClCompile Include="..\src\SlotPlayButton.cpp" />
     <ClCompile Include="..\src\SoundManager.cpp" />
     <ClCompile Include="..\src\StartButton.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="..\src\SceneState.h" />
     <ClInclude Include="..\src\ShapeType.h" />
     <ClInclude Include="..\src\SlotMachine.h" />
+    <ClInclude Include="..\src\SlotMachineImage.h" />
     <ClInclude Include="..\src\SlotPlayButton.h" />
     <ClInclude Include="..\src\SoundManager.h" />
     <ClInclude Include="..\src\StartButton.h" />

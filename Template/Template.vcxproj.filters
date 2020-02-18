@@ -31,6 +31,9 @@
     <Filter Include="Enums">
       <UniqueIdentifier>{c00e61a2-9515-4297-a699-76a9a5f3005e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="slotMachineResultImages">
+      <UniqueIdentifier>{d2ef6aa0-6679-4aa7-bd50-03288870812f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -105,9 +108,6 @@
     <ClCompile Include="..\src\Island.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\SlotMachine.cpp">
-      <Filter>Game Objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\SlotPlayButton.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
@@ -119,6 +119,12 @@
     </ClCompile>
     <ClCompile Include="..\src\ResetButton.cpp">
       <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SlotMachine.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SlotMachineImage.cpp">
+      <Filter>slotMachineResultImages</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,9 +221,6 @@
     <ClInclude Include="..\src\Island.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\SlotMachine.h">
-      <Filter>Game Objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\SlotPlayButton.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
@@ -231,6 +234,12 @@
       <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\src\ResetButton.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SlotMachineImage.h">
+      <Filter>slotMachineResultImages</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SlotMachine.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
   </ItemGroup>

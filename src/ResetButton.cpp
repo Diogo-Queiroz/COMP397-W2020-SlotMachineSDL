@@ -19,7 +19,7 @@ bool ResetButton::ButtonClick()
 	{
 		if (!m_isClicked)
 		{
-			SlotMachine::Instance()->resetAll();
+			TheSlotMachine::Instance()->resetAll();
 			m_isClicked = false;
 		}
 		return true;

@@ -5,13 +5,14 @@
 #include "Scene.h"
 #include "Plane.h"
 #include "Island.h"
-#include "SlotMachine.h"
+#include "SlotMachineImage.h"
 #include "StartButton.h"
 #include "SlotPlayButton.h"
 #include "Label.h"
 #include "BetButton.h"
 #include "QuitButton.h"
 #include "ResetButton.h"
+#include "SlotMachine.h"
 
 class Level1Scene : public Scene
 {
@@ -20,6 +21,7 @@ public:
 	~Level1Scene();
 	
 	void draw() override;
+	void updateLabels() const;
 	void update() override;
 	void clean() override;
 	void handleEvents() override;
@@ -66,6 +68,11 @@ private:
 	QuitButton* m_pQuitButton;
 	ResetButton* m_pResetButton;
 	//DialogButton* m_pDialogButton;
+
+	// Image set
+	SlotMachineImage* m_pSpinImage1;
+	SlotMachineImage* m_pSpinImage2;
+	SlotMachineImage* m_pSpinImage3;	
 
 };
 

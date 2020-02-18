@@ -1,6 +1,9 @@
 #include "Level1Scene.h"
+#include "SlotMachine.h"
 #include "Game.h"
 #include <iostream>
+
+float winRatio;
 
 Level1Scene::Level1Scene()
 {
@@ -15,6 +18,8 @@ void Level1Scene::draw()
 {
 	m_pSlotMachine->draw();
 	m_pSlotPlayButton->draw();
+	m_pResetButton->draw();
+	m_pQuitButton->draw();
 
 	//Labels
 	m_pJackpotLabel->draw();
@@ -39,10 +44,54 @@ void Level1Scene::draw()
 	m_pMinus_25_Button->draw();
 	m_pMinus_50_Button->draw();
 	m_pMinus_100_Button->draw();
+
+	// Spin images
+	m_pSpinImage1->draw();
+	m_pSpinImage2->draw();
+	m_pSpinImage3->draw();
+}
+
+void Level1Scene::updateLabels() const
+{
+	m_pMoneyLabel->setText("Player Money: " + std::to_string(TheSlotMachine::Instance()->getPlayerMoney()));
+	m_pJackpotLabel->setText("JackPot: " + std::to_string(TheSlotMachine::Instance()->m_jackpot));
+	m_pTurnLabel->setText("Turn: " + std::to_string(TheSlotMachine::Instance()->m_turn));
+	m_pWinLabel->setText("Winnings: " + std::to_string(TheSlotMachine::Instance()->m_winNumber));
+	m_pLossLabel->setText("Losses" + std::to_string(TheSlotMachine::Instance()->m_lossNumber));
+	winRatio = TheSlotMachine::Instance()->m_winRatio;
+	m_pWinRatioLabel->setText("WinRatio: " + std::to_string(winRatio) + "%");
+	m_pBetLabel->setText("Bet: " +  std::to_string(TheSlotMachine::Instance()->m_playerBet));
+	/*std::cout << "spin result ";
+	for (int i = 0; i < TheSlotMachine::Instance()->m_spinResult.size(); i++)
+	{
+		std::cout << TheSlotMachine::Instance()->m_spinResult[i] << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "m_pFruits = " << TheSlotMachine::Instance()->m_fruits << std::endl;
+	std::vector<std::string> spinResults = TheSlotMachine::Instance()->m_spinResult;
+	if (spinResults.empty())
+	{
+		std::cout << "Is Empty" << std::endl;
+	}
+	else
+	{
+		std::cout << "Not Empty" << std::endl;
+		m_pSpinImage1->setImage(spinResults[0]);
+		m_pSpinImage1->draw();
+	}*/
+	//m_pSpinImage2->setImage(TheSlotMachine::Instance()->m_spinResult[1]);
+	//m_pSpinImage3->setImage(TheSlotMachine::Instance()->m_spinResult[2]);
 }
 
 void Level1Scene::update()
 {
+	m_pSpinImage1->setItem(TheSlotMachine::Instance()->m_spinResultIndex[0]);
+	m_pSpinImage2->setItem(TheSlotMachine::Instance()->m_spinResultIndex[1]);
+	m_pSpinImage3->setItem(TheSlotMachine::Instance()->m_spinResultIndex[2]);
+	std::cout << "spin1 " << TheSlotMachine::Instance()->m_spinResultIndex[0];
+	std::cout << " spin2 " << TheSlotMachine::Instance()->m_spinResultIndex[1];
+	std::cout << " spin3 " << TheSlotMachine::Instance()->m_spinResultIndex[2] << std::endl;
+	
 	m_pSlotPlayButton->setMousePosition(m_mousePosition);
 	m_pSlotPlayButton->ButtonClick();
 
@@ -79,7 +128,15 @@ void Level1Scene::update()
 	m_pMinus_25_Button->ButtonClick();
 	m_pMinus_50_Button->ButtonClick();
 	m_pMinus_100_Button->ButtonClick();
-
+	
+	//std::cout << "Player Bet = " << TheSlotMachine::Instance()->m_playerBet << std::endl;
+	//std::cout << "PLayer Money = " << TheSlotMachine::Instance()->m_playerMoney << std::endl;
+	//std::cout << "Turn = " << TheSlotMachine::Instance()->m_turn << std::endl;
+	//std::cout << "Winnings = " << TheSlotMachine::Instance()->m_winnings << std::endl;
+	//std::cout << "WinNumber = " << TheSlotMachine::Instance()->m_winNumber << std::endl;
+	//std::cout << "LossNumber = " << TheSlotMachine::Instance()->m_lossNumber << std::endl;
+	//std::cout << "winRatio = " << TheSlotMachine::Instance()->m_winRatio << std::endl;
+	
 }
 
 void Level1Scene::clean()
@@ -109,6 +166,21 @@ void Level1Scene::handleEvents()
 			{
 			case SDL_BUTTON_LEFT:
 				m_pSlotPlayButton->setMouseButtonClicked(true);
+				
+				m_pPlus_01_Button->setMouseButtonClicked(true);
+				m_pPlus_05_Button->setMouseButtonClicked(true);
+				m_pPlus_10_Button->setMouseButtonClicked(true);
+				m_pPlus_25_Button->setMouseButtonClicked(true);
+				m_pPlus_50_Button->setMouseButtonClicked(true);
+				m_pPlus_100_Button->setMouseButtonClicked(true);
+
+				m_pMinus_01_Button->setMouseButtonClicked(true);
+				m_pMinus_05_Button->setMouseButtonClicked(true);
+				m_pMinus_10_Button->setMouseButtonClicked(true);
+				m_pMinus_25_Button->setMouseButtonClicked(true);
+				m_pMinus_50_Button->setMouseButtonClicked(true);
+				m_pMinus_100_Button->setMouseButtonClicked(true);
+
 				break;
 			}
 		
@@ -118,6 +190,23 @@ void Level1Scene::handleEvents()
 			{
 			case SDL_BUTTON_LEFT:
 				m_pSlotPlayButton->setMouseButtonClicked(false);
+
+				m_pPlus_01_Button->setMouseButtonClicked(false);
+				m_pPlus_05_Button->setMouseButtonClicked(false);
+				m_pPlus_10_Button->setMouseButtonClicked(false);
+				m_pPlus_25_Button->setMouseButtonClicked(false);
+				m_pPlus_50_Button->setMouseButtonClicked(false);
+				m_pPlus_100_Button->setMouseButtonClicked(false);
+
+				m_pMinus_01_Button->setMouseButtonClicked(false);
+				m_pMinus_05_Button->setMouseButtonClicked(false);
+				m_pMinus_10_Button->setMouseButtonClicked(false);
+				m_pMinus_25_Button->setMouseButtonClicked(false);
+				m_pMinus_50_Button->setMouseButtonClicked(false);
+				m_pMinus_100_Button->setMouseButtonClicked(false);
+
+				Level1Scene::updateLabels(); // Method to update labels after release the mouse button to reduce memory leak
+				
 				break;
 			}
 			break;
@@ -182,35 +271,40 @@ void Level1Scene::handleEvents()
 
 void Level1Scene::start()
 {
-	//m_pPlane = new Plane(); // instantiates Plane
-	//addChild(m_pPlane);
-
-	//m_pIsland = new Island(); // instantiates Island
-	//addChild(m_pIsland);
-
+	TheSlotMachine::Instance()->resetAll();
+	TheSlotMachine::Instance()->resetFruitTally();
 	// The Slot Machine
 	m_pSlotMachine =		new SlotMachine();
 	addChild(m_pSlotMachine);
 
+	// Slot Images
+	m_pSpinImage1 = new SlotMachineImage("Blank", glm::vec2(416, 227), 1);
+	m_pSpinImage2 = new SlotMachineImage("Blank", glm::vec2(493, 227), 2);
+	m_pSpinImage3 = new SlotMachineImage("Blank", glm::vec2(570, 227), 3);
+	addChild(m_pSpinImage1);
+	addChild(m_pSpinImage2);
+	addChild(m_pSpinImage3);
+	
 	// SDL Colors
-	const SDL_Color blue = { 0,0,255,255 };
-	const int size = 15;
+	const SDL_Color white = { 255,255,255,255 };
+	const std::string fontType = "Kingthings Trypewriter 2";
+	const int size = 18;
 	
 	//Labels
-	m_pJackpotLabel =		new Label("Jackpot Label", "Dock51", size, blue,
-								glm::vec2(120, 100.f));
-	m_pMoneyLabel =			new Label("Money Player", "Dock51", size, blue,
-								glm::vec2(400, 150.f));
-	m_pTurnLabel =			new Label("Turn Label", "Dock51", size, blue,
-								glm::vec2(600, 200.f));
-	m_pWinLabel =			new Label("Win Label", "Dock51", size, blue,
-								glm::vec2(150, 250.f));
-	m_pLossLabel =			new Label("Loss Label", "Dock51", size, blue,
-								glm::vec2(30, 300.f));
-	m_pWinRatioLabel =		new Label("WIn Ratio Label", "Dock51", size, blue,
-								glm::vec2(280, 350.f));
-	m_pBetLabel =			new Label("Bet Label""Dock51", "Dock51", size, blue,
-								glm::vec2(360, 400.f));
+	m_pJackpotLabel =		new Label("Jackpot Label", fontType, size, white,
+								glm::vec2(225, 10.0f));
+	m_pMoneyLabel =			new Label("Money Player", fontType, size, white,
+								glm::vec2(225, 150.0f));
+	m_pTurnLabel =			new Label("Turn Label", fontType, size, white,
+								glm::vec2(225, 200.0f));
+	m_pWinLabel =			new Label("Win Label", fontType, size, white,
+								glm::vec2(225, 250.0f));
+	m_pLossLabel =			new Label("Loss Label", fontType, size, white,
+								glm::vec2(225, 300.0f));
+	m_pWinRatioLabel =		new Label("WIn Ratio Label", fontType, size, white,
+								glm::vec2(225, 350.0f));
+	m_pBetLabel =			new Label("Bet Label", fontType, size, white,
+								glm::vec2(225, 400.0f));
 
 	// Buttons
 	m_pSlotPlayButton =		new SlotPlayButton();
@@ -220,13 +314,6 @@ void Level1Scene::start()
 	addChild(m_pQuitButton);
 	addChild(m_pResetButton);
 
-	m_pPlus_01_Button =		new BetButton(1, plus, "plus");
-	m_pPlus_05_Button =		new BetButton(5, plus, "plus");
-	m_pPlus_10_Button =		new BetButton(10, plus, "plus");
-	m_pPlus_25_Button =		new BetButton(25, plus, "plus");
-	m_pPlus_50_Button =		new BetButton(50, plus, "plus");
-	m_pPlus_100_Button =	new BetButton(100, plus, "plus");
-
 	m_pMinus_01_Button =	new BetButton(1, minus, "minus");
 	m_pMinus_05_Button =	new BetButton(5, minus, "minus");
 	m_pMinus_10_Button =	new BetButton(10, minus, "minus");
@@ -234,20 +321,32 @@ void Level1Scene::start()
 	m_pMinus_50_Button =	new BetButton(50, minus, "minus");
 	m_pMinus_100_Button =	new BetButton(100, minus, "minus");	
 
+	m_pPlus_01_Button =		new BetButton(1, plus, "plus");
+	m_pPlus_05_Button =		new BetButton(5, plus, "plus");
+	m_pPlus_10_Button =		new BetButton(10, plus, "plus");
+	m_pPlus_25_Button =		new BetButton(25, plus, "plus");
+	m_pPlus_50_Button =		new BetButton(50, plus, "plus");
+	m_pPlus_100_Button =	new BetButton(100, plus, "plus");
+
+
 	// Buttons Positions
-	m_pPlus_01_Button->setPosition(glm::vec2(Config::SCREEN_WIDTH,50));
-	m_pPlus_05_Button->setPosition(glm::vec2(Config::SCREEN_WIDTH + 50, 100));
-	m_pPlus_10_Button->setPosition(glm::vec2(Config::SCREEN_WIDTH + 100, 150));
-	m_pPlus_25_Button->setPosition(glm::vec2(Config::SCREEN_WIDTH + 150, 200));
-	m_pPlus_50_Button->setPosition(glm::vec2(Config::SCREEN_WIDTH + 250, 250));
-	m_pPlus_100_Button->setPosition(glm::vec2(Config::SCREEN_WIDTH + 300, 300));
+	m_pSlotPlayButton->setPosition(glm::vec2(Config::SCREEN_WIDTH - 40, Config::SCREEN_HEIGHT - 20));
+	m_pResetButton->setPosition(glm::vec2(Config::SCREEN_WIDTH - 100, Config::SCREEN_HEIGHT - 20));
+	m_pQuitButton->setPosition(glm::vec2(Config::SCREEN_WIDTH - 20, 20));
+	
+	m_pPlus_01_Button->setPosition(glm::vec2(25,25));
+	m_pPlus_05_Button->setPosition(glm::vec2(25, 65));
+	m_pPlus_10_Button->setPosition(glm::vec2(25, 105));
+	m_pPlus_25_Button->setPosition(glm::vec2(25, 145));
+	m_pPlus_50_Button->setPosition(glm::vec2(25, 185));
+	m_pPlus_100_Button->setPosition(glm::vec2(25, 225));
 					   
-	m_pMinus_01_Button->setPosition(glm::vec2(100, 50));
-	m_pMinus_05_Button->setPosition(glm::vec2(100, 100));
-	m_pMinus_10_Button->setPosition(glm::vec2(100, 150));
-	m_pMinus_25_Button->setPosition(glm::vec2(100, 200));
-	m_pMinus_50_Button->setPosition(glm::vec2(100, 250));
-	m_pMinus_100_Button->setPosition(glm::vec2(100, 300));
+	m_pMinus_01_Button->setPosition(glm::vec2(65, 25));
+	m_pMinus_05_Button->setPosition(glm::vec2(65, 65));
+	m_pMinus_10_Button->setPosition(glm::vec2(65, 105));
+	m_pMinus_25_Button->setPosition(glm::vec2(65, 145));
+	m_pMinus_50_Button->setPosition(glm::vec2(65, 185));
+	m_pMinus_100_Button->setPosition(glm::vec2(65, 225));
 
 	// Adding Childs
 	addChild(m_pPlus_01_Button);

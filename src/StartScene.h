@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "Label.h"
 #include "StartButton.h"
+#include "BetButton.h"
 
 class StartScene : public Scene
 {

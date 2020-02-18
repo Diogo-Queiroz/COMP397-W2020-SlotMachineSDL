@@ -1,5 +1,6 @@
 #include "SlotPlayButton.h"
 #include "SlotMachine.h"
+#include "SlotMachineImage.h"
 #include "Game.h"
 
 SlotPlayButton::SlotPlayButton() : Button(
@@ -19,7 +20,15 @@ bool SlotPlayButton::ButtonClick()
 	{
 		if (!m_isClicked)
 		{
-			SlotMachine().reels();
+			TheSlotMachine::Instance()->m_spinResult = TheSlotMachine::Instance()->reels();
+			TheSlotMachine::Instance()->m_fruits =
+				TheSlotMachine::Instance()->m_spinResult[0] + " - " +
+				TheSlotMachine::Instance()->m_spinResult[1] + " - " +
+				TheSlotMachine::Instance()->m_spinResult[2];
+			std::cout << "Result: " + TheSlotMachine::Instance()->m_fruits << std::endl;
+			TheSlotMachine::Instance()->determineWinnings();
+			TheSlotMachine::Instance()->m_turn++;
+			TheSlotMachine::Instance()->showPlayerStats();
 			m_isClicked = true;
 		}
 		return true;
