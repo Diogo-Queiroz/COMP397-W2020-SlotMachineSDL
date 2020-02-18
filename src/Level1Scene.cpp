@@ -88,9 +88,6 @@ void Level1Scene::update()
 	m_pSpinImage1->setItem(TheSlotMachine::Instance()->m_spinResultIndex[0]);
 	m_pSpinImage2->setItem(TheSlotMachine::Instance()->m_spinResultIndex[1]);
 	m_pSpinImage3->setItem(TheSlotMachine::Instance()->m_spinResultIndex[2]);
-	std::cout << "spin1 " << TheSlotMachine::Instance()->m_spinResultIndex[0];
-	std::cout << " spin2 " << TheSlotMachine::Instance()->m_spinResultIndex[1];
-	std::cout << " spin3 " << TheSlotMachine::Instance()->m_spinResultIndex[2] << std::endl;
 	
 	m_pSlotPlayButton->setMousePosition(m_mousePosition);
 	m_pSlotPlayButton->ButtonClick();
@@ -181,6 +178,8 @@ void Level1Scene::handleEvents()
 				m_pMinus_50_Button->setMouseButtonClicked(true);
 				m_pMinus_100_Button->setMouseButtonClicked(true);
 
+				m_pResetButton->setMouseButtonClicked(true);
+				m_pQuitButton->setMouseButtonClicked(true);
 				break;
 			}
 		
@@ -205,6 +204,9 @@ void Level1Scene::handleEvents()
 				m_pMinus_50_Button->setMouseButtonClicked(false);
 				m_pMinus_100_Button->setMouseButtonClicked(false);
 
+				m_pResetButton->setMouseButtonClicked(false);
+				m_pQuitButton->setMouseButtonClicked(false);
+				
 				Level1Scene::updateLabels(); // Method to update labels after release the mouse button to reduce memory leak
 				
 				break;
@@ -281,9 +283,12 @@ void Level1Scene::start()
 	m_pSpinImage1 = new SlotMachineImage("Blank", glm::vec2(416, 227), 1);
 	m_pSpinImage2 = new SlotMachineImage("Blank", glm::vec2(493, 227), 2);
 	m_pSpinImage3 = new SlotMachineImage("Blank", glm::vec2(570, 227), 3);
-	addChild(m_pSpinImage1);
-	addChild(m_pSpinImage2);
-	addChild(m_pSpinImage3);
+	m_pSpinImage1->setItem(0);
+	m_pSpinImage2->setItem(0);
+	m_pSpinImage3->setItem(0);
+	//addChild(m_pSpinImage1);
+	//addChild(m_pSpinImage2);
+	//addChild(m_pSpinImage3);
 	
 	// SDL Colors
 	const SDL_Color white = { 255,255,255,255 };

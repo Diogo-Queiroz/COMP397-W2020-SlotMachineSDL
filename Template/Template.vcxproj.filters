@@ -242,5 +242,8 @@
     <ClInclude Include="..\src\SlotMachine.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\AuthorInfos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

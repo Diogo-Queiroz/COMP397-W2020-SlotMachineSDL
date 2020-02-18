@@ -35,6 +35,7 @@ public:
     void setItem(int itemIndex);
 
     int item;
+    GameItemType itemType;
 
 protected:
 

@@ -28,6 +28,10 @@ bool BetButton::ButtonClick()
 			{
 				TheSlotMachine::Instance()->setPlayerBet(0, negative);
 			}
+			else if (TheSlotMachine::Instance()->getPlayerBet() > TheSlotMachine::Instance()->m_playerMoney)
+			{
+				TheSlotMachine::Instance()->setPlayerBet(0, negative);
+			}
 			/*
 			 * GameManager::Instance()->playerBet += m_betValue;
 			 * if (GameManager::Instance()->playerBet < 0) {

@@ -101,7 +101,7 @@ void StartScene::start()
 {
 	SDL_Color blue = { 0, 0, 255, 255 };
 	const std::string fontType = "Kingthings Trypewriter 2";
-	m_pStartLabel = new Label("SIMPLE SLOT MACHINE", fontType, 80, blue, 
+	m_pStartLabel = new Label("SIMPLE SLOT MACHINE", fontType, 40, blue, 
 		glm::vec2(Config::SCREEN_WIDTH * 0.5f, 100.0f));
 	m_pStartLabel->setParent(this);
 	addChild(m_pStartLabel);

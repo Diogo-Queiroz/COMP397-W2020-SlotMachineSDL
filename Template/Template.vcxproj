@@ -195,6 +195,7 @@
     <ClInclude Include="..\include\IMGUI\imstb_textedit.h" />
     <ClInclude Include="..\include\IMGUI\imstb_truetype.h" />
     <ClInclude Include="..\include\IMGUI_SDL\imgui_sdl.h" />
+    <ClInclude Include="..\src\AuthorInfos.h" />
     <ClInclude Include="..\src\BetButton.h" />
     <ClInclude Include="..\src\Button.h" />
     <ClInclude Include="..\src\QuitButton.h" />

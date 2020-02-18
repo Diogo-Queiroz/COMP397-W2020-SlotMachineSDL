@@ -119,50 +119,50 @@ std::vector<std::string> SlotMachine::reels()
         if (checkRange(outCome[spin], 1, 27))
         {
             betLine[spin] = "Blank";
-            m_spinResultIndex[spin] = 0;
+            m_spinResultIndex[spin] = 1;
             m_blanks++;
         }
         else if (checkRange(outCome[spin], 28, 37)) // 15.4% probability 
         {
             betLine[spin] = "Grapes";
-            m_spinResultIndex[spin] = 1;
+            m_spinResultIndex[spin] = 6;
             m_grapes++;
         }
         else if (checkRange(outCome[spin], 38, 46)) // 13.8% probability
         {
             betLine[spin] = "Banana";
-            m_spinResultIndex[spin] = 2;
+            m_spinResultIndex[spin] = 5;
             m_bananas++;
         }
         else if (checkRange(outCome[spin], 47, 54)) // 12.3% probability
         {
             betLine[spin] = "Orange";
-            m_spinResultIndex[spin] = 3;
+            m_spinResultIndex[spin] = 7;
             m_oranges++;
         }
         else if (checkRange(outCome[spin], 55, 59)) //  7.7% probability
         {
             betLine[spin] = "Cherry";
-            m_spinResultIndex[spin] = 4;
+            m_spinResultIndex[spin] = 8;
             m_cherries++;
 
         }
         else if (checkRange(outCome[spin], 60, 62)) //  4.6% probability
         {
             betLine[spin] = "Bar";
-            m_spinResultIndex[spin] = 5;
+            m_spinResultIndex[spin] = 3;
             m_bars++;
         }
         else if (checkRange(outCome[spin], 63, 64)) //  3.1% probability
         {
             betLine[spin] = "Bell";
-            m_spinResultIndex[spin] = 6;
+            m_spinResultIndex[spin] = 4;
             m_bells++;
         }
         else if (checkRange(outCome[spin], 65, 65)) //  1.5% probability
         {
             betLine[spin] = "Seven";
-            m_spinResultIndex[spin] = 7;
+            m_spinResultIndex[spin] = 2;
             m_sevens++;
         }
         
